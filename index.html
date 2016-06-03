@@ -1,0 +1,561 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>VoteWise API</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;angular&quot;,&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="angular">angular</a>
+              <a href="#" data-language-name="shell">cURL</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://github.com/spencersnygg/VoteWise2'>VoteWise Repo</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Welcome to the VoteWise API! You can use our API to access VoteWise API endpoints, which can get information on various users, states, districts and more in our database.</p>
+
+<p>Our docs all refrence Angular 1.x. You can view code examples in the dark area to the right.</p>
+
+<h1 id="authentication">Authentication</h1>
+
+<p>This API uses JSON web tokens, at the moment the only protected routes are prefixed with /admin ( for development purposes ).</p>
+
+<p>For the front end something like this could be use to simplify the process of injecting JWT&rsquo;s into headers <a href='https://github.com/auth0/angular-jwt'>auth0 Angular</a></p>
+
+<h1 id="users">Users</h1>
+
+<h2 id="create-a-user">Create a user</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'POST',
+    url: http://localhost:8080/user/signup,
+    data: $.param({
+      name: "john Doh",
+      password: "password",
+      city: "Philadelphia",
+      street: "2604 E Somerset St",
+      zip: "15004",
+      username: "JohnyyDoh",
+      email: "Johny@gmail.com"
+      }),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight json"><code><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User validation failed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidationError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email address is already registered"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidatorError"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email address is already registered"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This useranme is already registered"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidatorError"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This useranme is already registered"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoh"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoh"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint creates a user ( voter ).</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://localhost:8080/user/signup</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Fields</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The users name.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>The users email.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>The users password.</td>
+</tr>
+<tr>
+<td>city</td>
+<td>The users city.</td>
+</tr>
+<tr>
+<td>street</td>
+<td>The users street.</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>The users zip.</td>
+</tr>
+<tr>
+<td>username</td>
+<td>The users username</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — set your headers to &lsquo;Content-Type&rsquo;: 'application/x-www-form-urlencoded&rsquo;
+</aside>
+
+<h2 id="get-a-token-sign-a-user-in">Get a token! ( sign a user in )</h2>
+<pre class="highlight plaintext"><code>$http({
+    method: 'POST',
+    url: 'http://localhost:8080/authenticate',
+    data: $.param({
+      password: "password",
+      email: "Johny@gmail.com"
+      }),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+})
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enjoy your token!"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsic3RyaWN0TW9kZSI6dHJ1ZSwiZ2V0dGVycyI6e30sIndhc1BvcHVsYXRlZCI6ZmFsc2UsImFjdGl2ZVBhdGhzIjp7InBhdGhzIjp7ImFkZHJlc3MiOiJpbml0IiwicHJlc3MiOiJpbml0IiwiYWR2b2NhdGUiOiJpbml0IiwicG9saXRpY2lhbiI6ImluaXQiLCJhZG1pbiI6ImluaXQiLCJnZW9EaXYiOiJpbml0IiwicGFzc3dvcmQiOiJpbml0IiwiZW1haWwiOiJpbml0IiwidXNlcm5hbWUiOiJpbml0IiwibmFtZSI6ImluaXQiLCJjcmVhdGVkIjoiaW5pdCIsIl9fdiI6ImluaXQiLCJfaWQiOiJpbml0In0sInN0YXRlcyI6eyJpZ25vcmUiOnt9LCJkZWZhdWx0Ijp7fSwiaW5pdCI6eyJfX3YiOnRydWUsImNyZWF0ZWQiOnRydWUsInVzZXJuYW1lIjp0cnVlLCJnZW9EaXYiOnRydWUsImVtYWlsIjp0cnVlLCJhZGRyZXNzIjp0cnVlLCJhZHZvY2F0ZSI6dHJ1ZSwicHJlc3MiOnRydWUsInBvbGl0aWNpYW4iOnRydWUsImFkbWluIjp0cnVlLCJwYXNzd29yZCI6dHJ1ZSwibmFtZSI6dHJ1ZSwiX2lkIjp0cnVlfSwibW9kaWZ5Ijp7fSwicmVxdWlyZSI6e319LCJzdGF0ZU5hbWVzIjpbInJlcXVpcmUiLCJtb2RpZnkiLCJpbml0IiwiZGVmYXVsdCIsImlnbm9yZSJdfSwiZW1pdHRlciI6eyJkb21haW4iOm51bGwsIl9ldmVudHMiOnt9LCJfZXZlbnRzQ291bnQiOjAsIl9tYXhMaXN0ZW5lcnMiOjB9fSwi"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User not found! "</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint verifies a user and returns a token.</p>
+
+<aside class="warning">These tokens expire in 24 hours and should be sent in headers for every authorized request </aside>
+
+<aside class="success">
+Since Advocate, Press and Politician all extend user, you can get a token for all of them at this endpoint.
+</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p>`POST http://localhost:8080/authenticate</p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Fields</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>The users email.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>The users password.</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-a-new-advocate">Create a new Advocate</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'POST',
+    url: http://localhost:8080/advocate/signup,
+    data: $.param({
+      name: "john Doh",
+      password: "password",
+      city: "Philadelphia",
+      street: "2604 E Somerset St",
+      zip: "15004",
+      username: "JohnyyDoh",
+      email: "Johny@gmail.com",
+      jobs: true,
+      taxes: true,
+      url: 'www.johndoh.com'
+      }),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight json"><code><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User validation failed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidationError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email address is already registered"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidatorError"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email address is already registered"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This useranme is already registered"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidatorError"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This useranme is already registered"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoh"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoh"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint creates a Advocate.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://localhost:8080/advocate/signup</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Fields</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The users name.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>The users email.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>The users password.</td>
+</tr>
+<tr>
+<td>city</td>
+<td>The users city.</td>
+</tr>
+<tr>
+<td>street</td>
+<td>The users street.</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>The users zip.</td>
+</tr>
+<tr>
+<td>username</td>
+<td>The users username.</td>
+</tr>
+<tr>
+<td>Civil Liberties</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Crime and Punishment</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Education</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Energy</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Environment</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Gun Control</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Health and Safety</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Immigration</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Infrastructure</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>International Relations</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Jobs and the Economy</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Quality of Life</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Reproduction</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Taxes</td>
+<td>( interest ) Boolean.</td>
+</tr>
+<tr>
+<td>Social Services</td>
+<td>( interest ) Boolean.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — set your headers to 'Content-Type&rsquo;: 'application/x-www-form-urlencoded&rsquo;
+</aside>
+
+<aside class="warning">
+Need to send at least 2 interests, or will receive validation error.
+</aside>
+
+          <h1 id="errors">Errors</h1>
+
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+
+<p>The Kittn API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request sucks</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The request is hidden for administrators only</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified requeest could not be found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a route with an invalid method</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; The route requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&rsquo;m a teapot</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many objects! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="angular">angular</a>
+                <a href="#" data-language-name="shell">cURL</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
