@@ -378,7 +378,7 @@ $http({
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint creates a Advocate.</p>
+<p>This endpoint creates a Advocate user.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -489,6 +489,611 @@ Remember — set your headers to 'Content-Type&rsquo;: 'application/x-www-form-u
 <aside class="warning">
 Need to send at least 2 interests, or will receive validation error.
 </aside>
+
+<h2 id="create-a-new-press">Create a new Press</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'POST',
+    url: http://localhost:8080/press/signup,
+    data: $.param({
+      name: "john Doh",
+      password: "password",
+      city: "Philadelphia",
+      street: "2604 E Somerset St",
+      zip: "15004",
+      username: "JohnyyDoh",
+      email: "Johny@gmail.com",
+      mediaOutlet: "TMZ",
+      ( area of interest see Advocate )
+      }),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight json"><code><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User validation failed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidationError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email address is already registered"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidatorError"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email address is already registered"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This useranme is already registered"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidatorError"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This useranme is already registered"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoh"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoh"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint creates a new Press user.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://localhost:8080/press/signup</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Fields</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The users name.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>The users email.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>The users password.</td>
+</tr>
+<tr>
+<td>city</td>
+<td>The users city.</td>
+</tr>
+<tr>
+<td>street</td>
+<td>The users street.</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>The users zip.</td>
+</tr>
+<tr>
+<td>username</td>
+<td>The users username</td>
+</tr>
+<tr>
+<td>mediaOutlet</td>
+<td>The users media outlet ( paper, magazine ect.. )</td>
+</tr>
+<tr>
+<td>areaOfInterests</td>
+<td>See Advocate</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — set your headers to 'Content-Type&rsquo;: 'application/x-www-form-urlencoded&rsquo;
+</aside>
+
+<h2 id="create-a-new-politician">Create a new Politician</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'POST',
+    url: http://localhost:8080/politician/signup,
+    data: $.param({
+      name: "john Doh",
+      password: "password",
+      city: "Philadelphia",
+      street: "2604 E Somerset St",
+      zip: "15004",
+      username: "JohnyyDoh",
+      email: "Johny@gmail.com",
+      positionWanted: "Senator",
+      website: "www.google.com",
+      homeZip: "15004",
+      positionState: "PA",
+      positionCity: "Philadelphia"
+      positionCounty: "Beaver County",
+      additionalInfo: "Passionate about criminal justice, loves food."
+
+
+      }),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight json"><code><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User validation failed"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidationError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email address is already registered"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidatorError"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email address is already registered"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This useranme is already registered"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ValidatorError"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This useranme is already registered"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoh"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user defined"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"username"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoh"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint creates a new Politician user.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://localhost:8080/politician/signup</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Fields</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The users name.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>The users email.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>The users password.</td>
+</tr>
+<tr>
+<td>city</td>
+<td>The users city.</td>
+</tr>
+<tr>
+<td>street</td>
+<td>The users street.</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>The users zip.</td>
+</tr>
+<tr>
+<td>username</td>
+<td>The users username</td>
+</tr>
+<tr>
+<td>mediaOutlet</td>
+<td>The users media outlet ( paper, magazine ect.. )</td>
+</tr>
+<tr>
+<td>positionWanted</td>
+<td></td>
+</tr>
+<tr>
+<td>website</td>
+<td>Politicians website,</td>
+</tr>
+<tr>
+<td>homeZip</td>
+<td>Home town zip code,</td>
+</tr>
+<tr>
+<td>positionState</td>
+<td>State where position is held,</td>
+</tr>
+<tr>
+<td>positionCity</td>
+<td>City where position is held,</td>
+</tr>
+<tr>
+<td>positionCounty</td>
+<td>County where position is held,</td>
+</tr>
+<tr>
+<td>additionalInfo</td>
+<td>Any additional info ( limited to 60 characters )</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — set your headers to 'Content-Type&rsquo;: 'application/x-www-form-urlencoded&rsquo;
+</aside>
+
+<h1 id="admin">Admin</h1>
+
+<h2 id="set-your-headers-before-every-request">Set your headers before every request</h2>
+
+<h2 id="get-a-list-of-users">Get a list of users</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'GET',
+    url: http://localhost:8080/admin/user/all,
+    headers: {'x-access-token': 'Token here'}
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574f90f13bda0817269284c4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john doh"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$2a$10$mcmj1gklog6fqanrji0z0od/gpdpnoly3mr8bce5acsytsrxfpmq."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"politician"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"press"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"advocate"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574f90f03bda0817269284c3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"geoDiv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a3b"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"randoms"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-02T01:50:41.373Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574faf103c515dca29790de7"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john doh"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$2a$10$t3nqdefydsccb//kx6qfwox8hxbycus3o3rvqw7ow73mad5tk2nja"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"advocate"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"press"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"politician"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574faf103c515dca29790de5"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RandomDude@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"geoDiv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a3b"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"djtouchet,jalapano"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-02T03:59:12.661Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574fb235ce7939412ae2b2c7"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john doh"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$2a$10$2jiku3fctiwvtcqtv94mlotecd8vrnd4kutu1egtgzl6rlvsdiono"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"advocate"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"press"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"politician"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574fb235ce7939412ae2b2c5"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"geoDiv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a3b"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeUsername"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-02T04:12:37.537Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint gets all users ( Voter, Politician, Press and Advocate ).</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://localhost:8080/admin/user/all</code></p>
+
+<h2 id="get-a-user-by-id">Get a user by ID</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'GET',
+    url: http://localhost:8080/admin/user/574f90f13bda0817269284c4,
+    headers: {'x-access-token': 'Token here'}
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574f90f13bda0817269284c4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john doh"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$2a$10$mcmj1gklog6fqanrji0z0od/gpdpnoly3mr8bce5acsytsrxfpmq."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"politician"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"press"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"advocate"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574f90f03bda0817269284c3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"random@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"geoDiv"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a3b"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"randoms"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-02T01:50:41.373Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>This endpoint get a specific user by there id. The &ldquo;:id&rdquo; should be replaced with the users id.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://localhost:8080/admin/user/:id</code></p>
+
+<h2 id="get-a-advocate-press-politician-by-id">Get a Advocate, Press, Politician by ID</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'GET',
+    url: http://localhost:8080/admin/advocate/574690d09a40f2aa5b987cc8,
+    headers: {'x-access-token': 'Token here'}
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574690d09a40f2aa5b987cc8"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574690d09a40f2aa5b987cc7"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.google.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"areaOfInterest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574690d09a40f2aa5b987cc6"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"confirmed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>This endpoint get a specific advocate, press or politician by there id or all by using <code class="prettyprint">/all</code></p>
+
+<p>You can use the <code class="prettyprint">userId</code> to get more info about the user by doing a <code class="prettyprint">GET http://localhost:8080/admin/user/:userId</code></p>
+
+<h3 id="http-requests">HTTP Requests</h3>
+
+<p><code class="prettyprint">GET http://localhost:8080/admin/advocate/:id</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/admin/advocate/all</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/admin/press/:id</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/admin/advocate/all</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/admin/politician/:id</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/admin/advocate/all</code></p>
+
+<h2 id="random-password-generator">Random Password Generator</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'GET',
+    url: http://localhost:8080/admin/randompass/8,
+    headers: {'x-access-token': 'Token here'}
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RTx3SQsKP"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>This endpoint generates a random password, with a length of what you pass in.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://localhost:8080/admin/user/:length</code></p>
+
+<h1 id="geodiv-lookup-only-pa">GeoDiv Lookup ( only PA )</h1>
+
+<h2 id="get-by-id-fedrep-statesen-staterep-zip-or-by-fips">Get by ID, fedRep, stateSen, stateRep, zip or by fips</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'GET',
+    url: 'http://localhost:8080/geodivpa/574a82ad74933e9d01423a11'
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+   </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a11"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"ZIPCensusTabulationArea"</span><span class="p">:</span><span class="w"> </span><span class="mi">15001</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"FIPSstate"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"vtd"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"fedRep"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"stateSen"</span><span class="p">:</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"stateRep"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"sduni"</span><span class="p">:</span><span class="w"> </span><span class="mi">2130</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"sdelm"</span><span class="p">:</span><span class="w"> </span><span class="mi">99999</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"sdsec"</span><span class="p">:</span><span class="w"> </span><span class="mi">99999</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"statePostalCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PA"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"votingDistrictName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALIQUIPPA VTD 01"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"ElementarySchoolDistrict"</span><span class="p">:</span><span class="w"> </span><span class="mi">4299999</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"SecondarySchoolDistrict"</span><span class="p">:</span><span class="w"> </span><span class="mi">4299999</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint get a specific geoDiv by id.</p>
+
+<h3 id="http-requests">HTTP Requests</h3>
+
+<p><code class="prettyprint">GET http://localhost:8080/geodivpa/:id</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/geodivpa/fedRep/:fedRep</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/geodivpa/stateSen/:stateSen</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/geodivpa/stateRep/:stateRep</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/geodivpa/zip/:zip</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/geodivpa/fips/:fips</code></p>
+
+<h1 id="fips-lookup">FIPS lookup</h1>
+
+<h2 id="get-by-state-or-fips-code">Get by state or fips code</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'GET',
+    url: 'http://localhost:8080/fips/PA'
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"fips"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a7c3acd6ea40c85e57a92"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"stateAbr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENNSYLVANIA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint get a specific geoDiv by id.</p>
+
+<h3 id="http-requests">HTTP Requests</h3>
+
+<p><code class="prettyprint">GET http://localhost:8080/fips/:state</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/fips/:code</code></p>
+
+<h1 id="zip-lookup">ZIP lookup</h1>
+
+<h2 id="get-by-id-state-or-city">Get by id, state or city</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'GET',
+    url: 'http://localhost:8080/ziplookup/state/PA'
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a9c32cd24d8720cfdc7be"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="mi">15003</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PA"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beaver County"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Beaver County"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a9c32cd24d8720cfdc7bd"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="mi">15001</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PA"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beaver County"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"Beaver County"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"Macarthur"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"W Aliquippa"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint allows you to loookup zip codes by state and city</p>
+
+<h3 id="http-requests">HTTP Requests</h3>
+
+<p><code class="prettyprint">GET http://localhost:8080/ziplookup/state/:state</code>  :state = ( PA, MI &hellip;. ) )</p>
+
+<p><code class="prettyprint">GET http://localhost:8080/ziplookup/city/:city</code></p>
+
+<p><code class="prettyprint">GET http://localhost:8080/ziplookup/zip/:zip</code></p>
 
           <h1 id="errors">Errors</h1>
 
