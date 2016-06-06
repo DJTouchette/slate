@@ -107,15 +107,15 @@ This endpoint creates a user ( voter ).
 
 ### Query Parameters
 
-Fields    | Description
---------- | -----------
-name | The users name.
-email | The users email.
-password | The users password.
-city | The users city.
-street | The users street.
-zip | The users zip.
-username | The users username
+Fields    | Description | Type
+--------- | ----------- | -----
+name | The users name. | String
+email | The users email. | String
+password | The users password. | String
+city | The users city. | String
+street | The users street. | String
+zip | The users zip. | Number
+username | The users username | String
 
 <aside class="success">
 Remember — set your headers to 'Content-Type': 'application/x-www-form-urlencoded'
@@ -166,10 +166,10 @@ Since Advocate, Press and Politician all extend user, you can get a token for al
 
 ### URL Parameters
 
-Fields    | Description
---------- | -----------
-email | The users email.
-password | The users password.
+Fields    | Description | Type
+--------- | ----------- | -----
+email | The users email. | String
+password | The users password. | String
 
 ## Create a new Advocate
 
@@ -373,17 +373,17 @@ This endpoint creates a new Press user.
 
 ### Query Parameters
 
-Fields    | Description
---------- | -----------
-name | The users name.
-email | The users email.
-password | The users password.
-city | The users city.
-street | The users street.
-zip | The users zip.
-username | The users username
-mediaOutlet | The users media outlet ( paper, magazine ect.. )
-areaOfInterests | See Advocate
+Fields    | Description | Type
+--------- | ----------- | -----
+name | The users name. | Stirng
+email | The users email. | String
+password | The users password. | String
+city | The users city. | String
+street | The users street. | String
+zip | The users zip. | String
+username | The users username | String
+mediaOutlet | The users media outlet ( paper, magazine ect.. ) | String
+areaOfInterests | See Advocate | See Advocate
 
 <aside class="success">
 Remember — set your headers to 'Content-Type': 'application/x-www-form-urlencoded'
@@ -477,23 +477,23 @@ This endpoint creates a new Politician user.
 
 ### Query Parameters
 
-Fields    | Description
---------- | -----------
-name | The users name.
-email | The users email.
-password | The users password.
-city | The users city.
-street | The users street.
-zip | The users zip.
-username | The users username
-mediaOutlet | The users media outlet ( paper, magazine ect.. )
-positionWanted |
-website| Politicians website,
-homeZip| Home town zip code,
-positionState| State where position is held,
-positionCity| City where position is held,
-positionCounty | County where position is held,
-additionalInfo | Any additional info ( limited to 60 characters )
+Fields    | Description | Type
+--------- | ----------- | -----
+name | The users name. | String
+email | The users email. | String
+password | The users password. | String
+city | The users city. | String
+street | The users street. | String
+zip | The users zip. | String
+username | The users username. | string
+mediaOutlet | The users media outlet ( paper, magazine ect.. ) | String
+positionWanted | Position Wanted | String
+website| Politicians website | String
+homeZip| Home town zip code | Number
+positionState| State where position is held | String
+positionCity| City where position is held | String
+positionCounty | County where position is held | String
+additionalInfo | Any additional info ( limited to 60 characters )| String
 
 
 <aside class="success">
