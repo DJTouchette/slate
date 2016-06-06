@@ -188,7 +188,10 @@ $http({
       email: "Johny@gmail.com",
       jobs: true,
       taxes: true,
-      url: 'www.johndoh.com'
+      url: 'www.johndoh.com',
+      type: 'chambers of commerce',
+      governingBody: [ 'state', 'federal' ],
+      registrationNum: [ 23423423423424, 213131313123321 ]
       }),
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 })
@@ -253,30 +256,34 @@ This endpoint creates a Advocate user.
 
 ### Query Parameters
 
-Fields    | Description
---------- | -----------
-name | The users name.
-email | The users email.
-password | The users password.
-city | The users city.
-street | The users street.
-zip | The users zip.
-username | The users username.
-Civil Liberties | ( interest ) Boolean.
-Crime and Punishment | ( interest ) Boolean.
-Education | ( interest ) Boolean.
-Energy | ( interest ) Boolean.
-Environment | ( interest ) Boolean.
-Gun Control | ( interest ) Boolean.
-Health and Safety | ( interest ) Boolean.
-Immigration | ( interest ) Boolean.
-Infrastructure | ( interest ) Boolean.
-International Relations | ( interest ) Boolean.
-Jobs and the Economy | ( interest ) Boolean.
-Quality of Life | ( interest ) Boolean.
-Reproduction | ( interest ) Boolean.
-Taxes | ( interest ) Boolean.
-Social Services | ( interest ) Boolean.
+Fields    | Description | Type
+--------- | -----------  --------
+name | The users name. | String
+email | The users email. | String
+password | The users password. | String
+city | The users city. | String
+street | The users street. | String
+zip | The users zip. | Number
+username | The users username. | String
+Civil Liberties | ( interest ) | Boolean
+Crime and Punishment | ( interest ) | Boolean
+Education | ( interest ) | Boolean
+Energy | ( interest ) | Boolean
+Environment | ( interest ) | Boolean
+Gun Control | ( interest ) | Boolean
+Health and Safety | ( interest ) | Boolean
+Immigration | ( interest ) | Boolean
+Infrastructure | ( interest ) | Boolean
+International Relations | ( interest ) | Boolean
+Jobs and the Economy | ( interest ) | Boolean
+Quality of Life | ( interest ) | Boolean
+Reproduction | ( interest ) | Boolean
+Taxes | ( interest ) | Boolean
+Social Services | ( interest ) | Boolean
+type | Types of Advocate accepted are: "non-profit", "registered lobbyist","chambers of commerce". | String
+governingBody | Governing body can be: "state", or "federal". Only required if type is "registered lobbyist" | String
+registrationNum | Registration number from governingBodybody. Only required if type is "registered lobbyist" | Number
+EIN | EIN is only required is if the Advocate type is "non-profit". ( Employer Identification Number, must be 9 digits ) | Number
 
 <aside class="success">
 Remember — set your headers to 'Content-Type': 'application/x-www-form-urlencoded'
