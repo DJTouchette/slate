@@ -322,7 +322,10 @@ $http({
       email: "Johny@gmail.com",
       jobs: true,
       taxes: true,
-      url: 'www.johndoh.com'
+      url: 'www.johndoh.com',
+      type: 'chambers of commerce',
+      governingBody: [ 'state', 'federal' ],
+      registrationNum: [ 23423423423424, 213131313123321 ]
       }),
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 })
@@ -386,101 +389,34 @@ $http({
 
 <h3 id="query-parameters">Query Parameters</h3>
 
-<table><thead>
-<tr>
-<th>Fields</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>The users name.</td>
-</tr>
-<tr>
-<td>email</td>
-<td>The users email.</td>
-</tr>
-<tr>
-<td>password</td>
-<td>The users password.</td>
-</tr>
-<tr>
-<td>city</td>
-<td>The users city.</td>
-</tr>
-<tr>
-<td>street</td>
-<td>The users street.</td>
-</tr>
-<tr>
-<td>zip</td>
-<td>The users zip.</td>
-</tr>
-<tr>
-<td>username</td>
-<td>The users username.</td>
-</tr>
-<tr>
-<td>Civil Liberties</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Crime and Punishment</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Education</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Energy</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Environment</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Gun Control</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Health and Safety</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Immigration</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Infrastructure</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>International Relations</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Jobs and the Economy</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Quality of Life</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Reproduction</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Taxes</td>
-<td>( interest ) Boolean.</td>
-</tr>
-<tr>
-<td>Social Services</td>
-<td>( interest ) Boolean.</td>
-</tr>
-</tbody></table>
+<p>Fields    | Description | Type
+&mdash;&mdash;&mdash; | &mdash;&mdash;&mdash;&ndash;  &mdash;&mdash;&ndash;
+name | The users name. | String
+email | The users email. | String
+password | The users password. | String
+city | The users city. | String
+street | The users street. | String
+zip | The users zip. | Number
+username | The users username. | String
+Civil Liberties | ( interest ) | Boolean
+Crime and Punishment | ( interest ) | Boolean
+Education | ( interest ) | Boolean
+Energy | ( interest ) | Boolean
+Environment | ( interest ) | Boolean
+Gun Control | ( interest ) | Boolean
+Health and Safety | ( interest ) | Boolean
+Immigration | ( interest ) | Boolean
+Infrastructure | ( interest ) | Boolean
+International Relations | ( interest ) | Boolean
+Jobs and the Economy | ( interest ) | Boolean
+Quality of Life | ( interest ) | Boolean
+Reproduction | ( interest ) | Boolean
+Taxes | ( interest ) | Boolean
+Social Services | ( interest ) | Boolean
+type | Types of Advocate accepted are: &ldquo;non-profit&rdquo;, &ldquo;registered lobbyist&rdquo;,&ldquo;chambers of commerce&rdquo;. | String
+governingBody | Governing body can be: &ldquo;state&rdquo;, or &ldquo;federal&rdquo;. Only required if type is &ldquo;registered lobbyist&rdquo; | String
+registrationNum | Registration number from governingBodybody. Only required if type is &ldquo;registered lobbyist&rdquo; | Number
+EIN | EIN is only required is if the Advocate type is &ldquo;non-profit&rdquo;. ( Employer Identification Number, must be 9 digits ) | Number</p>
 
 <aside class="success">
 Remember — set your headers to 'Content-Type&rsquo;: 'application/x-www-form-urlencoded&rsquo;
