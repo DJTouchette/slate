@@ -257,7 +257,7 @@ This endpoint creates a Advocate user.
 ### Query Parameters
 
 Fields    | Description | Type
---------- | -----------  --------
+--------- | ----------- | --------
 name | The users name. | String
 email | The users email. | String
 password | The users password. | String
