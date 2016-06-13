@@ -838,3 +838,333 @@ This endpoint allows you to loookup zip codes by state and city
 `GET http://localhost:8080/ziplookup/city/:city`
 
 `GET http://localhost:8080/ziplookup/zip/:zip`
+
+# Forum
+
+## Create a thread
+
+```angular
+
+$http({
+    method: 'POST',
+    url: http://localhost:8080/api/thread,
+    data: $.param({
+      title: 'Donald Trump'
+      }),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded', 'x-access-token': 'Token here' },
+})
+
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "thread": {
+    "_id": "575e0c55dd7e2ce910a206a0",
+    "title": "testing out some threads !!",
+    "authorId": "574f90f13bda0817269284c4",
+    "geo": "574a82ad74933e9d01423a3b",
+    "__v": 0,
+    "created": "2016-06-13T01:28:53.388Z"
+  }
+}
+
+```
+```json
+On error will return something like this ( invalid thread id was passed in ):
+
+{{
+  "success": false,
+  "error": {
+    "message": "Cast to ObjectId failed for value \"575e0c55dd7e2ce910a206a\" at path \"_id\"",
+    "name": "CastError",
+    "kind": "ObjectId",
+    "value": "575e0c55dd7e2ce910a206a",
+    "path": "_id"
+  }
+}
+```
+
+This endpoint creates a thread.
+
+### Query Parameters
+
+Fields    | Description | Type
+--------- | ----------- | -----
+title | The title of the thread. | String
+
+## Query threads
+
+```angular
+
+$http({
+    method: 'GET',
+    url: 'http://localhost:8080/api/thread/user/geo',
+    headers: {'x-access-token': 'Token here' },
+})
+
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "thread": [
+    {
+      "_id": "575e028dd5ff4cb40f13ead4",
+      "title": "The First real one! really, really",
+      "authorId": "574f90f13bda0817269284c4",
+      "geo": "574a82ad74933e9d01423a3b",
+      "__v": 0,
+      "created": "2016-06-13T00:47:09.841Z"
+    },
+    {
+      "_id": "575e0c55dd7e2ce910a206a0",
+      "title": "testing out some threads !!",
+      "authorId": "574f90f13bda0817269284c4",
+      "geo": "574a82ad74933e9d01423a3b",
+      "__v": 0,
+      "created": "2016-06-13T01:28:53.388Z"
+    }
+  ]
+}
+
+```
+```json
+On error will return something like this:
+
+{
+  "success": false,
+  "message": "Failed to authenticate token.",
+  "error": {
+    "name": "JsonWebTokenError",
+    "message": "invalid token"
+  }
+}
+```
+
+This endpoint returns all threads based on the users geoDiv. It gets the geoDiv from the JWT passed in.
+
+### HTTP Requests
+By users geoDiv:
+
+`GET http://localhost:8080/api/thread/user/geo`
+
+By specific geoDiv:
+
+`GET http://localhost:8080/api/thread/geo/:id`
+
+By thread ID:
+
+`GET http://localhost:8080/thread/:id`
+
+## Delete a thread
+
+```angular
+
+$http({
+    method: 'DELETE',
+    url: 'http://localhost:8080/api/thread/:id',
+    headers: { 'x-access-token': 'Token here' },
+})
+
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true
+}
+
+```
+```json
+On error will return something like this:
+
+{
+  "success": false,
+  "message": "Failed to authenticate token.",
+  "error": {
+    "name": "JsonWebTokenError",
+    "message": "invalid token"
+  }
+}
+```
+
+This endpoint Deletes a thread based on the ID given.
+
+### HTTP Requests
+
+`DELETE http://localhost:8080/api/thread/:threadId`
+
+## Create a post
+
+```angular
+
+$http({
+    method: 'POST',
+    url: 'http://localhost:8080/api/thread/575e0c55dd7e2ce910a206a0/post',
+    data: $.param({
+      content: 'I agree and/or disagree with the topic of this thread !!'
+      }),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded', 'x-access-token': 'Token here' },
+})
+
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "post": {
+    "__v": 0,
+    "content": "I agree and/or disagree with the topic of this thread !!",
+    "authorId": "574f90f13bda0817269284c4",
+    "geo": "574a82ad74933e9d01423a3b",
+    "threadId": "575e0c55dd7e2ce910a206a0",
+    "_id": "575e17b30fa0ce32128ac7dd",
+    "created": "2016-06-13T02:17:23.305Z"
+  }
+}
+
+```
+```json
+On error will return something like this ( invalid thread id was passed in ):
+
+{{
+  "success": false,
+  "error": {
+    "message": "Cast to ObjectId failed for value \"575e0c55dd7e2ce910a206a\" at path \"_id\"",
+    "name": "CastError",
+    "kind": "ObjectId",
+    "value": "575e0c55dd7e2ce910a206a",
+    "path": "_id"
+  }
+}
+```
+
+This endpoint creates a post in a thread.
+
+### HTTP Requests
+
+`POST http://localhost:8080/api/thread/:threadId/post`
+
+### Query Parameters
+
+Fields    | Description | Type
+--------- | ----------- | -----
+content | The content of the post. | String
+
+## Query posts
+
+```angular
+
+$http({
+    method: 'GET',
+    url: 'http://localhost:8080/api/post/thread/575e0c55dd7e2ce910a206a0',
+    headers: {'x-access-token': 'Token here' },
+})
+
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "post": [
+    {
+      "_id": "575e17b30fa0ce32128ac7dd",
+      "content": "I agree and/or disagree with the topic of this thread !!",
+      "authorId": "574f90f13bda0817269284c4",
+      "geo": "574a82ad74933e9d01423a3b",
+      "threadId": "575e0c55dd7e2ce910a206a0",
+      "__v": 0,
+      "created": "2016-06-13T02:17:23.305Z"
+    },
+    {
+      "_id": "575e1a890fa0ce32128ac7de",
+      "content": "The person who commented above me is not cool",
+      "authorId": "574f90f13bda0817269284c4",
+      "geo": "574a82ad74933e9d01423a3b",
+      "threadId": "575e0c55dd7e2ce910a206a0",
+      "__v": 0,
+      "created": "2016-06-13T02:29:29.691Z"
+    }
+  ]
+}
+
+```
+```json
+On error will return something like this:
+
+{
+  "success": false,
+  "message": "Failed to authenticate token.",
+  "error": {
+    "name": "JsonWebTokenError",
+    "message": "invalid token"
+  }
+}
+```
+
+This endpoint returns all post in a thread.
+
+### HTTP Requests
+
+By ID:
+
+`GET http://localhost:8080/api/thread/:threadId/post/:postId`
+
+By Thread ID:
+
+`GET http://localhost:8080/api/post/thread/:threadId`
+
+## Delete a post
+
+```angular
+
+$http({
+    method: 'DELETE',
+    url: 'http://localhost:8080/api/thread/575e0c55dd7e2ce910a206a0/post/575e17b30fa0ce32128ac7dd',
+    headers: { 'x-access-token': 'Token here' },
+})
+
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true
+}
+
+```
+```json
+On error will return something like this:
+
+{
+  "success": false,
+  "message": "Failed to authenticate token.",
+  "error": {
+    "name": "JsonWebTokenError",
+    "message": "invalid token"
+  }
+}
+```
+
+This endpoint Deletes a thread based on the ID given.
+
+### HTTP Requests
+
+`DELETE http://localhost:8080/api/thread/:threadId/post/:postId`
