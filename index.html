@@ -1178,6 +1178,339 @@ $http({
 
 <p><code class="prettyprint">GET http://localhost:8080/ziplookup/zip/:zip</code></p>
 
+<h1 id="forum">Forum</h1>
+
+<h2 id="create-a-thread">Create a thread</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'POST',
+    url: http://localhost:8080/api/thread,
+    data: $.param({
+      title: 'Donald Trump'
+      }),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded', 'x-access-token': 'Token here' },
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thread"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e0c55dd7e2ce910a206a0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testing out some threads !!"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574f90f13bda0817269284c4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"geo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a3b"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T01:28:53.388Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight json"><code><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">(</span><span class="w"> </span><span class="err">invalid</span><span class="w"> </span><span class="err">thread</span><span class="w"> </span><span class="err">id</span><span class="w"> </span><span class="err">was</span><span class="w"> </span><span class="err">passed</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">):</span><span class="w">
+
+</span><span class="p">{</span><span class="err">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cast to ObjectId failed for value \"575e0c55dd7e2ce910a206a\" at path \"_id\""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CastError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ObjectId"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e0c55dd7e2ce910a206a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_id"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint creates a thread.</p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Fields</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>The title of the thread.</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<h2 id="query-threads">Query threads</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'GET',
+    url: 'http://localhost:8080/api/thread/user/geo',
+    headers: {'x-access-token': 'Token here' },
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thread"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e028dd5ff4cb40f13ead4"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The First real one! really, really"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574f90f13bda0817269284c4"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"geo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a3b"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T00:47:09.841Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e0c55dd7e2ce910a206a0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testing out some threads !!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574f90f13bda0817269284c4"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"geo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a3b"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T01:28:53.388Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight json"><code><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed to authenticate token."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JsonWebTokenError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid token"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint returns all threads based on the users geoDiv. It gets the geoDiv from the JWT passed in.</p>
+
+<h3 id="http-requests">HTTP Requests</h3>
+
+<p>By users geoDiv:</p>
+
+<p><code class="prettyprint">GET http://localhost:8080/api/thread/user/geo</code></p>
+
+<p>By specific geoDiv:</p>
+
+<p><code class="prettyprint">GET http://localhost:8080/api/thread/geo/:id</code></p>
+
+<p>By thread ID:</p>
+
+<p><code class="prettyprint">GET http://localhost:8080/thread/:id</code></p>
+
+<h2 id="delete-a-thread">Delete a thread</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'DELETE',
+    url: 'http://localhost:8080/api/thread/:id',
+    headers: { 'x-access-token': 'Token here' },
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight json"><code><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed to authenticate token."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JsonWebTokenError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid token"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint Deletes a thread based on the ID given.</p>
+
+<h3 id="http-requests">HTTP Requests</h3>
+
+<p><code class="prettyprint">DELETE http://localhost:8080/api/thread/:threadId</code></p>
+
+<h2 id="create-a-post">Create a post</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'POST',
+    url: 'http://localhost:8080/api/thread/575e0c55dd7e2ce910a206a0/post',
+    data: $.param({
+      content: 'I agree and/or disagree with the topic of this thread !!'
+      }),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded', 'x-access-token': 'Token here' },
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"post"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I agree and/or disagree with the topic of this thread !!"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"authorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574f90f13bda0817269284c4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"geo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a3b"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e0c55dd7e2ce910a206a0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e17b30fa0ce32128ac7dd"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T02:17:23.305Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight json"><code><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">(</span><span class="w"> </span><span class="err">invalid</span><span class="w"> </span><span class="err">thread</span><span class="w"> </span><span class="err">id</span><span class="w"> </span><span class="err">was</span><span class="w"> </span><span class="err">passed</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">):</span><span class="w">
+
+</span><span class="p">{</span><span class="err">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cast to ObjectId failed for value \"575e0c55dd7e2ce910a206a\" at path \"_id\""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CastError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ObjectId"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e0c55dd7e2ce910a206a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_id"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint creates a post in a thread.</p>
+
+<h3 id="http-requests">HTTP Requests</h3>
+
+<p><code class="prettyprint">POST http://localhost:8080/api/thread/:threadId/post</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Fields</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>content</td>
+<td>The content of the post.</td>
+<td>String</td>
+</tr>
+</tbody></table>
+
+<h2 id="query-posts">Query posts</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'GET',
+    url: 'http://localhost:8080/api/post/thread/575e0c55dd7e2ce910a206a0',
+    headers: {'x-access-token': 'Token here' },
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"post"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e17b30fa0ce32128ac7dd"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I agree and/or disagree with the topic of this thread !!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574f90f13bda0817269284c4"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"geo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a3b"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e0c55dd7e2ce910a206a0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T02:17:23.305Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e1a890fa0ce32128ac7de"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The person who commented above me is not cool"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574f90f13bda0817269284c4"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"geo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"574a82ad74933e9d01423a3b"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"threadId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"575e0c55dd7e2ce910a206a0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"__v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T02:29:29.691Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight json"><code><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed to authenticate token."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JsonWebTokenError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid token"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint returns all post in a thread.</p>
+
+<h3 id="http-requests">HTTP Requests</h3>
+
+<p>By ID:</p>
+
+<p><code class="prettyprint">GET http://localhost:8080/api/thread/:threadId/post/:postId</code></p>
+
+<p>By Thread ID:</p>
+
+<p><code class="prettyprint">GET http://localhost:8080/api/post/thread/:threadId</code></p>
+
+<h2 id="delete-a-post">Delete a post</h2>
+<pre class="highlight plaintext"><code>
+$http({
+    method: 'DELETE',
+    url: 'http://localhost:8080/api/thread/575e0c55dd7e2ce910a206a0/post/575e17b30fa0ce32128ac7dd',
+    headers: { 'x-access-token': 'Token here' },
+})
+
+
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<pre class="highlight json"><code><span class="err">On</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">something</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this:</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Failed to authenticate token."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JsonWebTokenError"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invalid token"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint Deletes a thread based on the ID given.</p>
+
+<h3 id="http-requests">HTTP Requests</h3>
+
+<p><code class="prettyprint">DELETE http://localhost:8080/api/thread/:threadId/post/:postId</code></p>
+
           <h1 id="errors">Errors</h1>
 
 <p>The VoteWise API uses the following error codes:</p>
